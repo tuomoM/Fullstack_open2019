@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Courses from './components/Courses'
 import './index.css';
 
 const App  = () => {
@@ -52,25 +53,7 @@ const App  = () => {
 
   )
 }
-const Courses = ({courses})=>{
-    
-    const r = courses.map(a => Course(a) )
-    
-console.log('Return',r)
-return(r)}  
-const Course = (course) =>{
-  console.log(course,course.name)
-  return(
-      <>
-      <h2 key={course.id} >{course.name}</h2>
-         
-             {course.parts.map(parts => <p key={parts.id}> {parts.name} {parts.exercises} </p>)}
-             <p>yhteensä {course.parts.reduce((sum, {exercises})=> sum + exercises,0)} tehtävää</p>
-      </>
 
-
-  )
-}
 ReactDOM.render(<App />, document.getElementById('root'));
 
 
