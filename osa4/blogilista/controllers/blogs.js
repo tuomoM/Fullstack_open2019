@@ -12,27 +12,13 @@ blogRouter.put(`/:id`, async (request, response, next) => {
         const result = await Blog.findByIdAndUpdate(request.params.id, request.body, {
             new: true
         })
-        console.log('return', result)
         response.status(201).json(result)
     } catch (e) {
         response.status(400).json(e.message)
     }
 
 })
-/*
-blogRouter.put('/:id', async (request, response, next) => {
 
-
-    try {
-        const updatedBlog = await Blog.findByIdAndUpdate(request.body.id, request.body)
-        console.log('response in program', updatedBlog)
-        response.status(201).json(updatedBlog)
-    } catch (e) {
-        console.log('error ', e.message)
-        response.status(400).json(e.message)
-    }
-})
-*/
 blogRouter.delete('/:id', async (request, response, next) => {
     try {
         await Blog.findByIdAndDelete(request.params.id)

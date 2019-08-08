@@ -99,35 +99,24 @@ describe('Tests to update existing entries', () => {
 
         const delResult = await api.delete(`/api/blogs/${id}`)
             .expect(204)
+        const newResult = await api.get('/api/blogs')
+        expect(newResult.body.length).toBe(2)
     })
     test('Test increasing likes of blog 1 12 likes -> 13 likes', async () => {
-        const result = await api.get('/api/blogs').expect(200)
-        let blog = result.body[1]
-        blog.likes = 12
+        let result = await api.get('/api/blogs').expect(200)
+        let blog = result.body[0]
+        blog.likes = 13
         blog.url = 'uusiUrli'
         const id = blog.id
-
-
         const updateResult = await api.put(`/api/blogs/${id}`)
             .send(blog)
-        console.log('result', result.status, result.body.likes)
-        expect(updateResult.body.likes).toEqual(12)
 
+        expect(updateResult.body.likes).toEqual(13)
+        result = await api.get('/api/blogs')
+        expect(result.body[0].likes).toBe(13)
 
-        /*
-        const updatedBlog = await Blog.findByIdAndUpdate(blog.id, blog)
-
-        expect(blog.likes).toBe((result.body[0].likes + 1))
-*/
-    })
-
-    test('check that the updates are in database', async () => {
-        const result = await api.get('/api/blogs')
-        expect(result.body.length).toBe(2)
-        expect(result.body[0].likes).toBe(12)
 
     })
-
 })
 
 
