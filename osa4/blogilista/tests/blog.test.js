@@ -7,14 +7,18 @@ const testBlogs = require('./blogtestdata')
 
 beforeEach(async () => {
     await Blog.deleteMany({})
+    await api.post('/api/blogs').send(testBlogs[0])
+    await api.post('/api/blogs').send(testBlogs[1])
+    await api.post('/api/blogs').send(testBlogs[2])
+    /*
+        const newBlog = new Blog(testBlogs[0])
+        await newBlog.save()
+        const newBlog1 = new Blog(testBlogs[1])
+        await newBlog1.save()
+        const newBlog2 = new Blog(testBlogs[2])
+        await newBlog2.save()
 
-    const newBlog = new Blog(testBlogs[0])
-    await newBlog.save()
-    const newBlog1 = new Blog(testBlogs[1])
-    await newBlog1.save()
-    const newBlog2 = new Blog(testBlogs[2])
-    await newBlog2.save()
-
+    */
 
     /*
     Blog.findByIdAndUpdate(reques.params.id, updatedBlog)
